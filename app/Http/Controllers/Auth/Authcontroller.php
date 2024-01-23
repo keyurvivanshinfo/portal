@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class Authcontroller extends Controller
 {
@@ -60,8 +60,12 @@ class Authcontroller extends Controller
         $checlLoginCredentials = $request->only($type, 'password');
 
         if (Auth::attempt($checlLoginCredentials)) {
-            session(['usernmae' => Auth::user()->username]);
-            return redirect('/')->withSuccess('you are logged in');
+            Session(['username' => Auth::user()->username]);
+            if(Auth::user()->role=='0'){
+                return redirect('userDashboard')->withSuccess('you are logged in');
+            }else if(Auth::user()->role=='1'){
+                return redirect('adminDashboard')->withSuccess('you are logged in');
+            }
         } else {
             return redirect()->route('login')->withSuccess('incorrect id or password');
         }
@@ -69,8 +73,7 @@ class Authcontroller extends Controller
 
     public function logout(Request $request)
     {
-        Session:
-        flush();
+        Session::flush();
         Auth::logout();
         return redirect('login');
     }

@@ -1,7 +1,37 @@
-@extends('layout')
+{{-- @extends('layout') --}}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="icon" href="../assets/images/erp.png" type="image/x-icon"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
-@section('content')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+
+    <!-- <script src="../assets/js/jqueryCDN.js"></script> -->
+    <!-- <script src="../assets/js/jquery.js"></script> -->
+
+    <title>Index</title>
+</head>
+
+<body>
+
+    {{-- @extends('layout') --}}
+
+
+    {{-- @section('content') --}}
     <div class="col py-3">
         <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
@@ -17,7 +47,7 @@
                                 @endif
 
 
-                                <form method="post" action="{{ route('login.post') }}">
+                                <form method="post" action="{{ route('loginPost') }}">
                                     {!! csrf_field() !!}
 
 
@@ -44,11 +74,13 @@
 
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                    <button type="submit" name="submit" class="btn btn-primary mt-5 ml-5">Submit</button>
+                                    <button type="submit" name="submit"
+                                        class="btn btn-primary mt-5 ml-5">Submit</button>
 
                                 </form>
 
-                            <a class="mt-2" href="{{route('registration')}}">Dont hvae an account...?Click here to Register</a>
+                                <a class="mt-2" href="{{ route('registration') }}">Dont hvae an account...?Click here
+                                    to Register</a>
 
                             </div>
                         </div>
@@ -57,4 +89,9 @@
             </div>
         </section>
     </div>
-@endsection
+    {{-- @endsection --}}
+
+
+</body>
+
+</html>
