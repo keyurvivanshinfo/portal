@@ -13,6 +13,12 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
+    <style>
+        body {
+            background-color: lightyellow,
+        }
+    </style>
+
     <title>Index</title>
 </head>
 
@@ -20,7 +26,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid ">
-            <a class="navbar-brand" href="{{ route('userDashboard') }}">Creative_.ks</a>
+            <b class="mt-1"><a class="navbar-brand" href="{{ route('userDashboard') }}">
+                    <h3>Creative_.ks</h3>
+                </a></b>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,17 +36,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="{{ route('userDashboard') }}">Home</a>
-                    </li>
+                    </li> --}}
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li> --}}
                 </ul>
-                <form class="d-flex">
+                {{-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </nav>
@@ -59,7 +67,7 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-speedometer2"></i> <span
                                     class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
@@ -68,11 +76,18 @@
                                     <a href="{{ url('userUploadImage') }}" class="nav-link px-0"> <span
                                             class="d-none d-sm-inline">Upload Images</span> </a>
                                 </li>
-                                {{-- <li>
+                                <li>
                                     <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                                </li> --}}
+                                </li>
                             </ul>
+                        </li> --}}
+
+                        <li>
+                            <a href="{{ url('userUploadImage') }}" class="nav-link px-0 align-middle"> <i class="fs-4 bi-cloud-arrow-up-fill"></i><span
+                                class="ms-2 d-none d-sm-inline">Upload Images</span> </a>
                         </li>
+
+
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
@@ -122,18 +137,22 @@
                     </ul>
                     <hr>
                     <div class="dropdown pb-4 text-dark">
-                        <a href="#"
-                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+
+                        {{-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
                                 class="rounded-circle"> --}}
-                            <span class="d-none d-sm-inline mx-1 text-dark">{{ Session::get('username') }}</span>
+                        <button class="btn btn-outline-dark"><span class="d-none d-sm-inline mx-1 text-primary"> <i class="fs-4 bi-people ">   </i>
+                                <b class="text-primary">
+                                    {{ Session::get('username') }}</b></span>
+                            <hr>
+                            <a class="dropdown-item text-primary" href="{{ route('editUserByUserView') }}">Profile</a>
+                            <hr>
+                            <a class="dropdown-item text-primary" onclick="retun con()"
+                                href="{{ route('logout') }}">Sign out</a>
+                        </button>
+
                         </a>
 
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
 
-                        <li><a class="dropdown-item text-primary" onclick="retun con()"
-                                href="{{ route('logout') }}">Sign out</a></li>
                     </div>
                 </div>
             </div>

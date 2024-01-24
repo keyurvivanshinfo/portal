@@ -43,6 +43,10 @@ Route::middleware(["auth","userRole:0"])->group(function(){
     Route::get('userDashboard',[usercontroller::class,'userDashboard'])->name('userDashboard');
     Route::get('userUploadImage',[usercontroller::class,'userUploadImage'])->name('userUploadImage');
     Route::post('userUploadImagePost',[usercontroller::class,'userUploadImagePost'])->name('userUploadImagePost');
+    Route::post('editUserByUser',[usercontroller::class,'editUserByUser'])->name('editUserByUser');
+    Route::get('editUserByUserView',[usercontroller::class,'editUserByUserView'])->name('editUserByUserView');
+
+    
 });
 
 Route::middleware(["auth","userRole:1"])->group(function(){

@@ -34,7 +34,7 @@ class usercontroller extends Controller
             'image' => 'required'
         ]);
 
-        
+
         if ($request->hasFile('image')) {
 
             $image = $request->file("image");
@@ -43,10 +43,10 @@ class usercontroller extends Controller
             $fileNameWithExt = $request->file('image')->getClientOriginalName();
             $fileExt = $request->file('image')->getClientOriginalExtension();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileToStore = $fileName . "_" . time()."." . $fileExt;
-            
-            
-            
+            $fileToStore = $fileName . "_" . time() . "." . $fileExt;
+
+
+
             if ($request->file('image')->storeAs('public/images', $fileToStore)) {
                 echo "ok";
                 images::create([
@@ -58,5 +58,26 @@ class usercontroller extends Controller
                 return redirect()->route('userUploadImage')->withSuccess("Uploaded image not succesfully");
             }
         }
+    }
+
+    public function editUserByUser(Request $request)
+    {
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+        ]);
+        $user = User::find($request->id);
+        $user->update([
+            'fname'=>$request->fname,
+            'lname'=>$request->lname,
+        ]);
+        return redirect()->route('userDashboard')->with("success","Profile Updated successfully");
+    }
+
+
+    public function editUserByUserView()
+    {
+        $user = Auth::user();
+        return view('usersView.editUserByUserView')->with('user',$user);
     }
 }
