@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Enter email">
+                                            placeholder="Enter email" value="{{old('email')}}">
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Password">
+                                            placeholder="Password" value="{{old('password')}}">
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif

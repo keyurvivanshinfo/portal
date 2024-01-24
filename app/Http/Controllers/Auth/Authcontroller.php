@@ -57,7 +57,8 @@ class Authcontroller extends Controller
         $userOrEmail = $request->input('email');
         $type = filter_var($userOrEmail, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        
-        $checlLoginCredentials = $request->only($type, 'password');
+        
+        $checlLoginCredentials = [$type=>$request->input('email'),"password" =>$request->input('password')];
 
         if (Auth::attempt($checlLoginCredentials)) {
             Session(['username' => Auth::user()->username]);

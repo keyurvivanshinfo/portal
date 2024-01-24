@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Authcontroller;
 use App\Http\Controllers\user\usercontroller;
 use App\Http\Controllers\admin\admincontrolle;
+use App\Http\Controllers\Controller;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\checkRole;
@@ -25,7 +26,7 @@ use Cron\DayOfWeekField;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('userDashboard');
 })->middleware('auth');
 
 
@@ -41,12 +42,25 @@ Route::get('logout',[Authcontroller::class,'logout'])->name('logout');
 Route::middleware(["auth","userRole:0"])->group(function(){
     Route::get('userDashboard',[usercontroller::class,'userDashboard'])->name('userDashboard');
     Route::get('userUploadImage',[usercontroller::class,'userUploadImage'])->name('userUploadImage');
+    Route::post('userUploadImagePost',[usercontroller::class,'userUploadImagePost'])->name('userUploadImagePost');
 });
 
 Route::middleware(["auth","userRole:1"])->group(function(){
     Route::get('adminDashboard',[admincontrolle::class,'adminDashboard'])->name('adminDashboard');
     Route::get('adminUploadImage',[admincontrolle::class,'adminUploadImage'])->name('adminUploadImage');
+    Route::post('adminUploadImagePost',[admincontrolle::class,'adminUploadImagePost'])->name('adminUploadImagePost');
+    Route::get('adminViewAllUsers',[admincontrolle::class,'adminViewAllUsersGet'])->name('adminViewAllUsers');
+
+    Route::get('editUserByAdmin/{id}',[admincontrolle::class,'editUserByAdmin'])->name('editUserByAdmin');
+    Route::post('editUserByAdminPost',[admincontrolle::class,'editUserByAdminPost'])->name('editUserByAdminPost');
+
+    Route::get('deleteUserByAdmin/{id}',[admincontrolle::class,'deleteUserByAdmin'])->name('deleteUserByAdmin');
+    
 });
+
+// Route::get('cancelButton',[Controller::class,'cancelButton'])->name('cancelButton');
+
+
 
 
 

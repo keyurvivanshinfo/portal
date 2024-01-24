@@ -12,6 +12,7 @@ class images extends Model
 
     protected $fillable = [
         "productId",
+        "uploaderId",
         "imagePath"
     ];
 }

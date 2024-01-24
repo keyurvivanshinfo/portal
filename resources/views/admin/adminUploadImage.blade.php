@@ -11,11 +11,15 @@
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Upload image Form</h3>
 
                             @if (Session::has('success'))
-                                <div class='alert alert-sucess'>{{ Session::get('success') }}</div>
+                                <div class='alert alert-primary'>{{ Session::get('success') }}</div>
+                            @endif
+
+                            @if (Session::has('error'))
+                                <div class='alert alert-sucess'>{{ Session::get('error') }}</div>
                             @endif
 
 
-                            <form method="post" action="">
+                            <form method="post"  action="{{route('adminUploadImagePost')}}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">

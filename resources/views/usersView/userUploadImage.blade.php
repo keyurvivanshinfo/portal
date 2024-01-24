@@ -11,16 +11,12 @@
 
 
                             @if (Session::has('success'))
-                                <div class='alert alert-sucess'>{{ Session::get('success') }}</div>
+                                <div class='alert alert-primary'>{{ Session::get('success') }}</div>
                             @endif
 
 
-                            <form method="post" action="">
+                            <form method="post" action="{{route('userUploadImagePost')}}" enctype="multipart/form-data">
                                 @csrf
-
-
-
-
 
                                 <div class="form-group">
                                     <label for="image">Please select image</label>
@@ -31,17 +27,11 @@
                                     @endif
                                 </div>
 
-
-                                
-
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                 <button type="submit" name="submit" class="btn btn-primary mt-5 ml-5">Submit</button>
 
                             </form>
-
-                           
-
                         </div>
                     </div>
                 </div>

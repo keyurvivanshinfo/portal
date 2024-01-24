@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\images;
 use  Database\Seeders\imageSeeder;
+use Database\Seeders\userSeeder;
 
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(imageSeeder::class);
+        // $this->call(imageSeeder::class);
+        $this->call(userSeeder::class);
     }
 }

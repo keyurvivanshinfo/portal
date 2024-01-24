@@ -20,28 +20,24 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid ">
-            <a class="navbar-brand" href="{{ route('adminDashboard') }}">Creative_.ks</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon text-danger"></span>
-            </button>
-
-            <h3 class="text-danger">Admin pannel</h3>
+            <a class="navbar-brand text-black" href="{{ route('adminDashboard') }}"><b>Creative_.ks</b></a>
             
+
+            <h4 class="text-white mt-2">Admin pannel</h4>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="{{ route('adminDashboard') }}">Home</a>
-                    </li>
+                    </li> --}}
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li> --}}
                 </ul>
-                <form class="d-flex">
+                {{-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                    <button class="btn btn-outline-black" type="submit">Search</button>
+                </form> --}}
             </div>
         </div>
     </nav>
@@ -58,11 +54,11 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li class="nav-item">
-                            <a href="{{ route('userDashboard') }}" class="nav-link align-middle px-0">
+                            <a href="{{ route('adminDashboard') }}" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-speedometer2"></i> <span
                                     class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
@@ -71,15 +67,30 @@
                                     <a href="{{ url('adminUploadImage') }}" class="nav-link px-0"> <span
                                             class="d-none d-sm-inline">Upload Images</span> </a>
                                 </li>
-                                {{-- <li>
+                                <li>
                                     <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                                </li> --}}
+                                </li>
                             </ul>
+                        </li> --}}
+
+                        <li>
+                            <a href="{{ url('adminUploadImage') }}" class="nav-link px-0 align-middle"> <i class="fs-4 bi-cloud-arrow-up-fill"></i><span
+                                class="ms-2 d-none d-sm-inline">Upload Images</span> </a>
                         </li>
+
+
+                        <li>
+                            <a href="{{route('adminViewAllUsers')}}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-2 d-none d-sm-inline">Users</span></a>
+                        </li>
+
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                                <i class="fs-4 bi-table"></i> <span class="ms-2 d-none d-sm-inline">Orders</span></a>
                         </li>
+
+                        
+
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                 <i class="fs-4 bi-bootstrap"></i> <span
@@ -124,31 +135,53 @@
                         </li>
                     </ul>
                     <hr>
-                    <div class="dropdown pb-4">
+                    <div class="dropdown pb-4 text-dark">
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
-                                class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">loser</span>
+                            {{-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle"> --}}
+                            <span class="d-none d-sm-inline mx-1 text-dark">{{Session::get('username')}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            {{-- <li><a class="dropdown-item" href="#">New project...</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ url('logout') }}">Sign out</a></li>
+                            </li> --}}
+                        </ul>
+                        <ul>
+                            <a class="dropdown-item text-primary" onclick="return con()" href="{{ route('logout') }}">Sign out</a>
+
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col py-3">
+                @if (Session::has('success'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ Session::get('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </div>
     </div>
+
+
+    <script>
+        function con() {
+            let c = confirm("Are you Sure");
+            if (c) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 
 
 

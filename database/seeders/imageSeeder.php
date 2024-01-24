@@ -22,7 +22,7 @@ class imageSeeder extends Seeder
         for($i=0;$i<1000;$i++){
             $images =  new images;
             $images->imagePath = $faker->imageUrl;
-            $images->updated_at=$faker->dateTime;
+            $images->updated_at=$faker->time;
             $images->created_at=$faker->dateTime;
 
             $images->save();
