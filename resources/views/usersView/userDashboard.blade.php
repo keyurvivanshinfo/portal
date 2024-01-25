@@ -17,6 +17,8 @@
         body {
             background-color: lightyellow,
         }
+
+        
     </style>
 
     <title>Index</title>
@@ -67,20 +69,7 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="{{ url('userUploadImage') }}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline">Upload Images</span> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                                </li>
-                            </ul>
-                        </li> --}}
+                        
 
                         <li>
                             <a href="{{ url('userUploadImage') }}" class="nav-link px-0 align-middle"> <i class="fs-4 bi-cloud-arrow-up-fill"></i><span
@@ -89,8 +78,8 @@
 
 
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                            <a href="{{route('viewMyImages')}}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">View Images</span></a>
                         </li>
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -179,7 +168,6 @@
             }
         }
     </script>
-
 
 </body>
 

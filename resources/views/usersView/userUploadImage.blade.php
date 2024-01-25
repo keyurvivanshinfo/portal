@@ -14,16 +14,20 @@
                                 <div class='alert alert-primary'>{{ Session::get('success') }}</div>
                             @endif
 
+                            @if (Session::has('error'))
+                                <div class='alert alert-primary'>{{ Session::get('success') }}</div>
+                            @endif
+
 
                             <form method="post" action="{{route('userUploadImagePost')}}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">
                                     <label for="image">Please select image</label>
-                                    <input type="file" class="form-control" id="image" name="image"
-                                        placeholder="Enter email">
-                                    @if ($errors->has('image'))
-                                        <span class="text-danger">{{ $errors->first('image') }}</span>
+                                    <input type="file" class="form-control" id="images" name="images[]"
+                                        placeholder="Please select files" multiple>
+                                    @if ($errors->has('images'))
+                                        <span class="text-danger">{{ $errors->first('images') }}</span>
                                     @endif
                                 </div>
 

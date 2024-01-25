@@ -26,7 +26,7 @@ use Cron\DayOfWeekField;
 */
 
 Route::get('/', function () {
-    return view('userDashboard');
+    return view('usersView.userDashboard');
 })->middleware('auth');
 
 
@@ -41,10 +41,23 @@ Route::get('logout',[Authcontroller::class,'logout'])->name('logout');
 // user routes
 Route::middleware(["auth","userRole:0"])->group(function(){
     Route::get('userDashboard',[usercontroller::class,'userDashboard'])->name('userDashboard');
+
+    // images
     Route::get('userUploadImage',[usercontroller::class,'userUploadImage'])->name('userUploadImage');
     Route::post('userUploadImagePost',[usercontroller::class,'userUploadImagePost'])->name('userUploadImagePost');
+    Route::get('viewMyImages',[usercontroller::class,'viewMyImages'])->name('viewMyImages');
+    Route::get('downloadImage/{path}',[usercontroller::class,'downloadImage'])->name('downloadImage');
+    Route::get('deleteImage/{id}',[usercontroller::class,'deleteImage'])->name('deleteImage');
+
+    
+
+    
+
+    
     Route::post('editUserByUser',[usercontroller::class,'editUserByUser'])->name('editUserByUser');
     Route::get('editUserByUserView',[usercontroller::class,'editUserByUserView'])->name('editUserByUserView');
+
+    
 
     
 });

@@ -31,32 +31,48 @@ class usercontroller extends Controller
     public function userUploadImagePost(Request $request)
     {
         $request->validate([
-            'image' => 'required'
+            'images' => 'max:10',
+            'images.*' => 'required|mimes:jpg,jpeg,png|max:20000'
         ]);
 
 
-        if ($request->hasFile('image')) {
+        $images = $request->file('images');
+        $numberOfFiles = count($request->file('images'));
 
-            $image = $request->file("image");
+        $cnt = 0;
+
+        if ($request->hasFile('images')) {
+
 
             $user = Auth::id();
-            $fileNameWithExt = $request->file('image')->getClientOriginalName();
-            $fileExt = $request->file('image')->getClientOriginalExtension();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $fileToStore = $fileName . "_" . time() . "." . $fileExt;
+            echo $user;
+            foreach ($images as $image) {
+
+                $fileNameWithExt = $image->getClientOriginalName();
+                $fileExt = $image->getClientOriginalExtension();
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $fileToStore = $fileName . "_" . time() . "." . $fileExt;
 
 
 
-            if ($request->file('image')->storeAs('public/images', $fileToStore)) {
-                echo "ok";
-                images::create([
-                    'uploaderId' => $user,
-                    'imagePath' => $fileToStore
-                ]);
-                return redirect()->route('userUploadImage')->withSuccess("Uploaded image succesfully");
-            } else {
-                return redirect()->route('userUploadImage')->withSuccess("Uploaded image not succesfully");
+                if ($image->storeAs('public/images', $fileToStore)) {
+                    images::create([
+                        'uploaderId' => $user,
+                        'imagePath' => $fileToStore
+                    ]);
+
+                    $cnt++;
+                }
             }
+            echo "num" . $numberOfFiles;
+            echo "cnt" . $cnt;
+            if ($numberOfFiles == $cnt) {
+                return redirect()->route('userUploadImage')->withSuccess("All images uploaded succesfully");
+            } else {
+                return redirect()->route('userUploadImage')->withSuccess("Some image may not be uploaded");
+            }
+        } else {
+            return redirect()->route('userUploadImage')->withSuccess("Please select the file");
         }
     }
 
@@ -68,16 +84,49 @@ class usercontroller extends Controller
         ]);
         $user = User::find($request->id);
         $user->update([
-            'fname'=>$request->fname,
-            'lname'=>$request->lname,
+            'fname' => $request->fname,
+            'lname' => $request->lname,
         ]);
-        return redirect()->route('userDashboard')->with("success","Profile Updated successfully");
+        return redirect()->route('userDashboard')->with("success", "Profile Updated successfully");
     }
 
 
     public function editUserByUserView()
     {
         $user = Auth::user();
-        return view('usersView.editUserByUserView')->with('user',$user);
+        return view('usersView.editUserByUserView')->with('user', $user);
+    }
+
+
+    public function viewMyImages()
+    {
+        $userId = Auth::user()->id;
+        $data = images::where("uploaderId", $userId)->get();
+
+
+        return view('usersView.viewMyImages')->with("images", $data);
+    }
+
+
+    public function downloadImage($path)
+    {
+        $file = ("storage/images/$path");
+        return response()->download($file);
+    }
+
+    public function deleteImage($id)
+    {
+
+        $file = images::where("productId", $id)->first();
+        $fileName = $file->imagePath;
+
+        $delete = images::where('productId', $id)->delete();
+
+        if ($delete) {
+            unlink(public_path() . "/storage/images/" . $fileName);
+            return back()->with("success", "Image Deleted Successfully!");
+        } else {
+            return back()->with("error", "Error Occured! Try Again Later.");
+        }
     }
 }
