@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
-use App\Models\User;
 use Illuminate\Support\Facades\Session;
+
+// models
+use App\Models\User;
+use App\Models\forgotPassword;
 
 class Authcontroller extends Controller
 {

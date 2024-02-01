@@ -19,9 +19,6 @@
     </script>
 
 
-    <!-- <script src="../assets/js/jqueryCDN.js"></script> -->
-    <!-- <script src="../assets/js/jquery.js"></script> -->
-
     <title>Index</title>
 </head>
 
