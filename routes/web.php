@@ -32,6 +32,12 @@ Route::get('/', function () {
 
 Route::get('login',[Authcontroller::class,'index'])->name('login');
 Route::get('registration',[Authcontroller::class,'registration'])->name('registration');
+Route::get('forgotPassword',[Authcontroller::class,'forgotPassword'])->name('forgotPassword');
+Route::post('forgotPasswordPost',[Authcontroller::class,'forgotPasswordPost'])->name('forgotPasswordPost');
+
+
+
+
 
 Route::post('postRegistation',[Authcontroller::class,'postRegister'])->name('registrationPost');   
 Route::post('postLogin',[Authcontroller::class,'postLogin'])->name('loginPost');   
