@@ -22,7 +22,7 @@ class checkRole
         if(Auth::check() && Auth::user()->role==$role){
             return $next($request);
         }else{
-            return response('Unauthorized',401);
+            return response('You are unauthorized to access this page',401);
         }
     }
 }

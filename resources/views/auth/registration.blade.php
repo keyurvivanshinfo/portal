@@ -105,8 +105,6 @@
                                     <button type="submit" name="submit"
                                         class="btn btn-primary mt-5 ml-5">Submit</button>
 
-
-
                                 </form>
 
                                 <a class="mt-2" href="{{ route('login') }}">Allready hvae an account...?Click here to

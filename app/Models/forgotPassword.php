@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class forgotPassword extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'email',
         'token'
     ];
+
 }

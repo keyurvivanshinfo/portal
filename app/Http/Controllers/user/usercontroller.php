@@ -116,7 +116,7 @@ class usercontroller extends Controller
 
     public function deleteImage($id)
     {
-
+        
         $file = images::where("productId", $id)->first();
         $fileName = $file->imagePath;
 

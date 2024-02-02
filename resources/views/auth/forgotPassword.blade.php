@@ -24,10 +24,6 @@
 
 <body>
 
-    {{-- @extends('layout') --}}
-
-
-    {{-- @section('content') --}}
     <div class="col py-3">
         <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
@@ -38,31 +34,30 @@
                                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Forgot password</h3>
 
 
-                                
-
+                                @if (Session::has('success'))
+                                    <div class='alert alert-sucess'>{{ Session::get('success') }}</div>
+                                @endif
 
                                 <form method="post" action="{{ route('forgotPasswordPost') }}">
                                     {!! csrf_field() !!}
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Enter email" value="{{old('email')}}">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Enter email" value="{{ old('email') }}">
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
 
-                                    
-
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                                     <button type="submit" name="submit"
                                         class="btn btn-primary mt-5 ml-5">Submit</button>
 
                                 </form>
 
-                                <a class="mt-2" href="{{ route('login') }}"><button class="btn btn-success mt-4">Login</button></a>
+                                <a class="mt-2" href="{{ route('login') }}"><button
+                                        class="btn btn-success mt-4">Login</button></a>
 
                             </div>
                         </div>
