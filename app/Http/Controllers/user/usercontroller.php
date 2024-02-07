@@ -16,25 +16,26 @@ use Faker\Extension\Extension;
 
 class usercontroller extends Controller
 {
+    // User dashboard view
     public function userDashboard()
     {
         return view('usersView.userDashboard');
     }
 
-    // upload images function
+    // upload images view function
     public function userUploadImage()
     {
         return view('usersView.userUploadImage');
     }
 
 
+    // store image to server and enter data to the images table
     public function userUploadImagePost(Request $request)
     {
         $request->validate([
             'images' => 'max:10',
             'images.*' => 'required|mimes:jpg,jpeg,png|max:20000'
         ]);
-
 
         $images = $request->file('images');
         $numberOfFiles = count($request->file('images'));
@@ -53,14 +54,11 @@ class usercontroller extends Controller
                 $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
                 $fileToStore = $fileName . "_" . time() . "." . $fileExt;
 
-
-
                 if ($image->storeAs('public/images', $fileToStore)) {
                     images::create([
                         'uploaderId' => $user,
                         'imagePath' => $fileToStore
                     ]);
-
                     $cnt++;
                 }
             }
@@ -76,44 +74,15 @@ class usercontroller extends Controller
         }
     }
 
-    public function editUserByUser(Request $request)
-    {
-        $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-        ]);
-        $user = User::find($request->id);
-        $user->update([
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-        ]);
-        return redirect()->route('userDashboard')->with("success", "Profile Updated successfully");
-    }
 
-
-    public function editUserByUserView()
-    {
-        $user = Auth::user();
-        return view('usersView.editUserByUserView')->with('user', $user);
-    }
-
-
-    public function viewMyImages()
-    {
-        $userId = Auth::user()->id;
-        $data = images::where("uploaderId", $userId)->get();
-
-
-        return view('usersView.viewMyImages')->with("images", $data);
-    }
-
-
+    // download image from the server
     public function downloadImage($path)
     {
         $file = ("storage/images/$path");
         return response()->download($file);
     }
 
+    // delete image from the server and remove row from the images table using image id
     public function deleteImage($id)
     {
         
@@ -129,4 +98,39 @@ class usercontroller extends Controller
             return back()->with("error", "Error Occured! Try Again Later.");
         }
     }
+
+    // edit user details by users
+    public function editUserByUser(Request $request)
+    {
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+        ]);
+        $user = User::find($request->id);
+        $user->update([
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+        ]);
+        return redirect()->route('userDashboard')->with("success", "Profile Updated successfully");
+    }
+
+
+    // view edit user page
+    public function editUserByUserView()
+    {
+        $user = Auth::user();
+        return view('usersView.editUserByUserView')->with('user', $user);
+    }
+
+
+    // show images uploaded by the user
+    public function viewMyImages()
+    {
+        $userId = Auth::user()->id;
+        $data = images::where("uploaderId", $userId)->get();
+        return view('usersView.viewMyImages')->with("images", $data);
+    }
+
+
+   
 }

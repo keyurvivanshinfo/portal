@@ -131,12 +131,11 @@ class Authcontroller extends Controller
     public function postLogin(LoginUserRequest $request)
     {
 
-
         $userOrEmail = $request->input('email');
         $type = filter_var($userOrEmail, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        $checlLoginCredentials = [$type => $request->input('email'), "password" => $request->input('password')];
+        $checkLoginCredentials = [$type => $request->input('email'), "password" => $request->input('password')];
 
-        if (Auth::attempt($checlLoginCredentials)) {
+        if (Auth::attempt($checkLoginCredentials)) {
             Session(['username' => Auth::user()->username]);
             if (Auth::user()->role == '0') {
                 return redirect('userDashboard')->withSuccess('you are logged in');
@@ -152,6 +151,6 @@ class Authcontroller extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect('login');
+        return redirect()->route('login');
     }
 }

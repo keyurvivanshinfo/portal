@@ -69,6 +69,14 @@
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('googleSearch')}}" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-clipboard-check"></i> <span class="ms-1 d-none d-sm-inline">Learn Photography</span>
+                            </a>
+                        </li>
+
+                        
                         
 
                         <li>
@@ -146,6 +154,8 @@
                 </div>
             </div>
             <div class="col py-3">
+
+
                 @if (Session::has('success'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         {{ Session::get('success') }}

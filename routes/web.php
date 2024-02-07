@@ -29,6 +29,10 @@ Route::get('/', function () {
     return view('usersView.userDashboard');
 })->middleware('auth');
 
+Route::get('googleSearch',function(){
+    return redirect()->away('https://photofocus.com/');
+})->name('googleSearch');
+
 
 Route::view('login','auth.login')->name('login');
 Route::view('registration','auth.registration')->name('registration');
