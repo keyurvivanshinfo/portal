@@ -16,13 +16,13 @@ class userSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        for($i=0;$i<1000;$i++){
+        for ($i = 0; $i < 20; $i++) {
             $user =  new User;
             $user->fname = $faker->firstName;
-            $user->lname=$faker->lastName;
-            $user->username=$faker->userName;
-            $user->email=$faker->email;
-            $user->password=$faker->password;
+            $user->lname = $faker->lastName;
+            $user->username = $faker->userName;
+            $user->email = $faker->email;
+            $user->password = $faker->password;
             $user->save();
         }
     }

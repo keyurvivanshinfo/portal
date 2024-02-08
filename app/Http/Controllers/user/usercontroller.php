@@ -85,7 +85,7 @@ class usercontroller extends Controller
     // delete image from the server and remove row from the images table using image id
     public function deleteImage($id)
     {
-        
+
         $file = images::where("productId", $id)->first();
         $fileName = $file->imagePath;
 
@@ -130,7 +130,4 @@ class usercontroller extends Controller
         $data = images::where("uploaderId", $userId)->get();
         return view('usersView.viewMyImages')->with("images", $data);
     }
-
-
-   
 }

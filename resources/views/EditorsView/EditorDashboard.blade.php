@@ -13,31 +13,36 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: lightyellow,
+        }
+    </style>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
-
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
-
-    <title>Admin pannel</title>
+    <title>Index</title>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid ">
-            <a class="navbar-brand text-black" href="{{ route('adminDashboard') }}"><b>Creative_.ks</b></a>
+            <b class="mt-1"><a class="navbar-brand" href="{{ route('userDashboard') }}">
+                    <h3>Creative_.ks</h3>
+                </a></b>
+
+            <h4 class="text-white mt-2">Editor pannel</h4>
 
 
-            <h4 class="text-white mt-2">Admin pannel</h4>
-
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  
+
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -54,44 +59,33 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li class="nav-item">
-                            <a href="{{ route('adminDashboard') }}" class="nav-link align-middle px-0">
+                            <a href="{{ route('userDashboard') }}" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="{{ url('adminUploadImage') }}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline">Upload Images</span> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                                </li>
-                            </ul>
-                        </li> --}}
+
+                        <li class="nav-item">
+                            <a href="{{ route('googleSearch') }}" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-clipboard-check"></i> <span class="ms-1 d-none d-sm-inline">Learn
+                                    Photography</span>
+                            </a>
+                        </li>
+
+
+
 
                         <li>
-                            <a href="{{ url('adminUploadImage') }}" class="nav-link px-0 align-middle"> <i
+                            <a href="{{ url('userUploadImage') }}" class="nav-link px-0 align-middle"> <i
                                     class="fs-4 bi-cloud-arrow-up-fill"></i><span class="ms-2 d-none d-sm-inline">Upload
                                     Images</span> </a>
                         </li>
 
 
                         <li>
-                            <a href="{{ route('adminViewAllUsers') }}" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-2 d-none d-sm-inline">Users</span></a>
+                            <a href="{{ route('viewMyImages') }}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">View
+                                    Images</span></a>
                         </li>
-
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-2 d-none d-sm-inline">Orders</span></a>
-                        </li>
-
-
-
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                 <i class="fs-4 bi-bootstrap"></i> <span
@@ -137,30 +131,29 @@
                     </ul>
                     <hr>
                     <div class="dropdown pb-4 text-dark">
-                        <a href="#"
-                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
-                                class="rounded-circle"> --}}
-                            <span class="d-none d-sm-inline mx-1 text-dark">{{ Session::get('username') }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            {{-- <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li> --}}
-                        </ul>
-                        <ul>
-                            <a class="dropdown-item text-primary" onclick="return con()"
-                                href="{{ route('logout') }}">Sign out</a>
 
-                        </ul>
+                        {{-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle"> --}}
+                        <button class="btn btn-outline-dark"><span class="d-none d-sm-inline mx-1 text-primary"> <i
+                                    class="fs-4 bi-people "> </i>
+                                <b class="text-primary">
+                                    {{ Session::get('username') }}</b></span>
+                            <hr>
+                            <a class="dropdown-item text-primary" href="{{ route('editUserByUserView') }}">Profile</a>
+                            <hr>
+                            <a class="dropdown-item text-primary" onclick="retun con()"
+                                href="{{ route('logout') }}">Sign out</a>
+                        </button>
+
+                        </a>
+
+
                     </div>
                 </div>
             </div>
             <div class="col py-3">
+
+
                 @if (Session::has('success'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         {{ Session::get('success') }}
@@ -173,13 +166,9 @@
         </div>
     </div>
 
-
     <script>
-        $(document).ready(function() {
-            let table = new DataTable('#users');
-        });
 
-
+        
 
         function con() {
             let c = confirm("Are you Sure");
@@ -190,8 +179,6 @@
             }
         }
     </script>
-
-
 
 </body>
 

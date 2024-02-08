@@ -19,8 +19,17 @@ class checkRole
     
      public function handle(Request $request, Closure $next,$role): Response
     {
-        if(Auth::check() && Auth::user()->role==$role){
-            return $next($request);
+        if(Auth::check()){
+
+            $roleofuser = User::find(Auth::user()->id)->roles->first()?->id;
+            if($roleofuser == $role){
+                return $next($request);
+            }
+
+            
+            return response('You are unauthorized to access this page',401);
+
+
         }else{
             return response('You are unauthorized to access this page',401);
         }

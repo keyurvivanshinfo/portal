@@ -31,6 +31,11 @@
             <b class="mt-1"><a class="navbar-brand" href="{{ route('userDashboard') }}">
                     <h3>Creative_.ks</h3>
                 </a></b>
+
+            <h4 class="text-white mt-2">User pannel</h4>
+
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">

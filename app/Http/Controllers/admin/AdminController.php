@@ -5,24 +5,31 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\images;
-use App\Models\User;
+
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+// models
+use App\Models\images;
+use App\Models\User;
+use App\Models\Role;;
 
 
-
-class admincontrolle extends Controller
+class AdminController extends Controller
 {
+
+    // return admin dashboared view
     public function adminDashboard(){
         return view('admin.adminDashboard');
     }
+
+    // return admin upload image view
     public function adminUploadImage(){
         return view('admin.adminUploadImage');
     }
-
+    
+    // store the image uplod by the admin
     public function adminUploadImagePost(Request $request)
     {
         try{
@@ -59,8 +66,9 @@ class admincontrolle extends Controller
         }
     }
 
+    // return all users view with All users data with role
     public function adminViewAllUsersGet(){
-        $users = User::where('username','!=','admin')->get();
+        $users = User::where('username','!=','admin')->with('roles')->get();
         return view('admin.adminViewAllUsers')->with('users',$users);
     }
 
@@ -74,8 +82,6 @@ class admincontrolle extends Controller
         // echo $user;
         return view('admin.editUserByAdminView')->with('user',$user);
     }
-
-
 
     public function editUserByAdminPost(Request $request){
         $request->validate([
@@ -96,7 +102,19 @@ class admincontrolle extends Controller
         $user = User::find($id);
         $user->delete();
         
-        return redirect()->route('adminViewAllUsers')->with('sucess',"user deleted successfully");
+                return redirect()->route('adminViewAllUsers')->with('sucess',"user deleted successfully");
+    }
+
+        // update the role of the user
+    public function updateRole(Request $request){
+        
+        $user=User::find($request->input("userId")); 
+
+        $roleId = $request->input('roles');  
+        
+        $user->roles()->syncWithPivotValues($roleId,['created_at' => now()]);  
+
+        return redirect('adminViewAllUsers');
     }
 
 
