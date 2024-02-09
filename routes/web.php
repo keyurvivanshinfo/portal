@@ -67,7 +67,7 @@ Route::middleware(["auth", "userRole:2"])->group(function () {
     Route::get('editorDashboard', [EditorController::class, 'editorDashboard'])->name('EditorDashboard');
 });
 
-Route::middleware(["auth", "userRole:3"])->group(function () {
+Route::middleware(["auth"])->group(function () {
     Route::get('adminDashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
     Route::get('adminUploadImage', [AdminController::class, 'adminUploadImage'])->name('adminUploadImage');
     Route::post('adminUploadImagePost', [AdminController::class, 'adminUploadImagePost'])->name('adminUploadImagePost');

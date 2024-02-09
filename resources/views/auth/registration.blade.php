@@ -52,7 +52,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">First name</label>
                                         <input type="text" class="form-control" id="fname" name="fname"
-                                            aria-describedby="emailHelp" placeholder="Enter First name" value="{{old('fname')}}">
+                                            aria-describedby="emailHelp" placeholder="Enter First name"
+                                            value="{{ old('fname') }}">
                                         @if ($errors->has('fname'))
                                             <span class=" text-danger">{{ $errors->first('fname') }}</span>
                                         @endif
@@ -62,7 +63,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Last name</label>
                                         <input type="text" class="form-control" id="lname" name="lname"
-                                            aria-describedby="emailHelp" placeholder="Enter Last name" value="{{old('lname')}}">
+                                            aria-describedby="emailHelp" placeholder="Enter Last name"
+                                            value="{{ old('lname') }}">
                                         @if ($errors->has('lname'))
                                             <span class="text-danger">{{ $errors->first('lname') }}</span>
                                         @endif
@@ -71,7 +73,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Username</label>
                                         <input type="text" class="form-control" id="username" name="username"
-                                            aria-describedby="emailHelp" placeholder="Enter Last name" value="{{old('username')}}">
+                                            aria-describedby="emailHelp" placeholder="Enter Last name"
+                                            value="{{ old('username') }}">
                                         @if ($errors->has('username'))
                                             <span class="text-danger">{{ $errors->first('username') }}</span>
                                         @endif
@@ -82,7 +85,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input type="email" class="form-control" id="email" name="email"
-                                            aria-describedby="emailHelp" placeholder="Enter email" value="{{old('email')}}">
+                                            aria-describedby="emailHelp" placeholder="Enter email"
+                                            value="{{ old('email') }}">
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
@@ -92,7 +96,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Password" value="{{old('password')}}">
+                                            placeholder="Password" value="{{ old('password') }}">
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif

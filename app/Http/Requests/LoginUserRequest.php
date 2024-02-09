@@ -25,5 +25,22 @@ class LoginUserRequest extends FormRequest
             'email' => 'required',
             'password' => 'required',
         ];
+
+
     }
+
+
+
+    public function messages(){
+        return [
+            'email.required'=>"Hey...Please enter your email address first",
+            'password.required'=>"Hey...Please provide a password",
+        ];
+    }
+
+
+    
+
+
+
 }

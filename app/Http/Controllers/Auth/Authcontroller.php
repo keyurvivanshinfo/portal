@@ -31,10 +31,10 @@ use App\Http\Requests\ForgotPasswordRequest;
 class Authcontroller extends Controller
 {
     // return login page view
-    public function index()
-    {
-        return view('auth.login');
-    }
+    // public function index()
+    // {
+    //     return view('auth.login');
+    // }
 
 
     // forgot password send link to the user
@@ -121,7 +121,7 @@ class Authcontroller extends Controller
         $createUser = $this->create($data);
 
         $createUser->roles()->attach([1]);
-        // ['created_at' => now()->format('d-m-Y H:i:s'),'updated_at' => now()->format('d-m-Y H:i:s')]
+        // ['created_at' => now()->format('d-m-Y H:i:s'),d]
         return redirect()->route('login')->withSuccess('registered user');
     }
 
