@@ -67,6 +67,8 @@ Route::middleware(["auth", "userRole:2"])->group(function () {
     Route::get('editorDashboard', [EditorController::class, 'editorDashboard'])->name('EditorDashboard');
 });
 
+
+// middlware for all admin routes is applied over the AdminController class
 Route::middleware(["auth"])->group(function () {
     Route::get('adminDashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
     Route::get('adminUploadImage', [AdminController::class, 'adminUploadImage'])->name('adminUploadImage');
