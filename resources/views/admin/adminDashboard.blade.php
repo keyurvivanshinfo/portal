@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -202,23 +203,36 @@
         // });
 
         $('#sendAllUsers').click(function() {
-            $.ajax( {
+            $.ajax({
                 url: '{{ route('mailAllUserDataAjax') }}',
                 type: 'POST',
-                data:{
+                data: {
                     "_token": "{{ csrf_token() }}",
                 },
-               
+
                 success: function() {
-                    console.log("ok");
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Email send successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 },
-                error:function(e){
-                    console.log(e);
+                error: function(e) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "Cancelled",
+                        title: "something went wrong",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    
                 }
-                
+
             });
 
-            swal( "Mail Sent Successfully!", "", "success" );
+
         });
     </script>
 
