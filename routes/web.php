@@ -86,4 +86,8 @@ Route::middleware(["auth", 'userRole:3'])->group(function () {
 
     // send all users data into mail
     Route::post('mailAllUserDataPost', [AdminController::class, 'mailAllUserDataPost'])->name('mailAllUserDataPost');
+
+    Route::post('mailAllUserDataAjax', [AdminController::class, 'mailAllUserDataAjax'])->name('mailAllUserDataAjax');
+
+    
 });

@@ -137,7 +137,16 @@ class AdminController extends Controller
         return back();
     }
 
+    public function mailAllUserDataAjax(){
+        if(SendAllUserData::dispatchAfterResponse()){
+            return response("Email sent successfull");
+        }
+        return response("Something went wrong");
+    }
+
+    
+
+
 }
 
 
-git commit -m "added jobs for send all users,last 24 hours registred user data to the admin"

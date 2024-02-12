@@ -194,13 +194,32 @@
             } else {
                 return false;
             }
-           
+
         }
 
-        $('#sendAllUsers').click(function(){
+        // $('#sendAllUsers').click(function(){
+        //     swal( "Mail Sent Successfully!", "", "success" );
+        // });
+
+        $('#sendAllUsers').click(function() {
+            $.ajax( {
+                url: '{{ route('mailAllUserDataAjax') }}',
+                type: 'POST',
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                },
+               
+                success: function() {
+                    console.log("ok");
+                },
+                error:function(e){
+                    console.log(e);
+                }
+                
+            });
+
             swal( "Mail Sent Successfully!", "", "success" );
         });
-
     </script>
 
 

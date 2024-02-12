@@ -1,10 +1,8 @@
 @extends('admin/adminDashboard')
 
 @section('content')
-<form method="post" action="{{ route('mailAllUserDataPost') }}" enctype="multipart/form-data">
-    @csrf
-    <input type="submit" id="sendAllUsers" value="Send all users using post request" class="btn btn-danger ms-3 mr-5 mb-3">
-</form>
+
+<input type="submit" id="sendAllUsers" value="Send all users data" class="btn btn-secondary ms-3 mr-5 mb-3">
 
 
     <table id='users' name='users' class="table table-striped table-bordered">
