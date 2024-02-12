@@ -22,6 +22,9 @@ use App\Models\forgotPassword;
 // mail
 use App\Mail\resetPasswordMail;
 
+// jobs
+use App\Jobs\SendMail;
+
 
 // custome request
 use App\Http\Requests\RegisterUserRequest;
@@ -61,11 +64,13 @@ class Authcontroller extends Controller
                 'token' => $reset_token
             ];
 
-            if (Mail::to($request->input('email'))->send(new resetPasswordMail($maildata))) {
+
+            if (SendMail::dispatch($request->input('email'),$maildata)) {
                 return redirect()->route('login')->with('success', 'Password reset link has been sent to your email');
             } else {
                 return redirect()->back()->withInput()->withErrors(['faild' => "Failed To Send Email"]);
             }
+
         }
     }
 
@@ -75,10 +80,10 @@ class Authcontroller extends Controller
     {
         $checkToken = forgotPassword::where('email', $email)->where('token', $token)->first();
 
-        if ($checkToken) {
+        if ($checkToken != NULL) {
             return view('auth.resetPasswordForm', compact('email', 'token'));
         } else {
-            return redirect('/login')->with('failed', 'Invalid Link Or Token Expired! Please Try Again Later');
+            return redirect()->route('forgotPassword')->withSuccess('Invalid Link Or Token Expired! Please Try Again');
         }
     }
 

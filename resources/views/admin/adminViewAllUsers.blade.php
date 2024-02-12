@@ -1,8 +1,22 @@
 @extends('admin/adminDashboard')
 
 @section('content')
+<form method="post" action="{{ route('mailAllUserDataPost') }}" enctype="multipart/form-data">
+    @csrf
+    <input type="submit" id="sendAllUsers" value="Send all users using post request" class="btn btn-danger ms-3 mr-5 mb-3">
+</form>
+
+
     <table id='users' name='users' class="table table-striped table-bordered">
         <thead>
+            <tr>
+
+                {{-- with post request --}}
+
+
+                {{--  with get --}}
+
+            </tr>
             <tr>
                 <th style="width: 10%" scope="col">Id</th>
                 <th style="width: 10%" scope="col">First name</th>
@@ -48,8 +62,8 @@
                             {{-- radio button for roles --}}
                             <div class="form-check">
 
-                                <input class="form-check-input" type="checkbox" value="1" id="1"
-                                    name="roles[]" {{ in_array(1, $rolesId) ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" value="1" id="1" name="roles[]"
+                                    {{ in_array(1, $rolesId) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="userCheck">
                                     User
                                 </label>
@@ -58,8 +72,8 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" id="2"
-                                    name="roles[]" {{ in_array(2, $rolesId) ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" value="2" id="2" name="roles[]"
+                                    {{ in_array(2, $rolesId) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="editorCheck">
                                     Editor
                                 </label>

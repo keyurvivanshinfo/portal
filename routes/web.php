@@ -69,7 +69,7 @@ Route::middleware(["auth", "userRole:2"])->group(function () {
 
 
 // middlware for all admin routes is applied over the AdminController class
-Route::middleware(["auth"])->group(function () {
+Route::middleware(["auth", 'userRole:3'])->group(function () {
     Route::get('adminDashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
     Route::get('adminUploadImage', [AdminController::class, 'adminUploadImage'])->name('adminUploadImage');
     Route::post('adminUploadImagePost', [AdminController::class, 'adminUploadImagePost'])->name('adminUploadImagePost');
@@ -83,4 +83,7 @@ Route::middleware(["auth"])->group(function () {
 
     // delete user by admin
     Route::get('deleteUserByAdmin/{id}', [AdminController::class, 'deleteUserByAdmin'])->name('deleteUserByAdmin');
+
+    // send all users data into mail
+    Route::post('mailAllUserDataPost', [AdminController::class, 'mailAllUserDataPost'])->name('mailAllUserDataPost');
 });

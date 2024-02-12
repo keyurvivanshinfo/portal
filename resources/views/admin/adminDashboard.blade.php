@@ -188,31 +188,19 @@
 
 
         function con() {
-            // let c = confirm("Are you Sure");
-            // if (c) {
-            //     return true;
-            // } else {
-            //     return false;
-            // }
-
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            });
+            let c = confirm("Are you Sure");
+            if (c) {
+                return true;
+            } else {
+                return false;
+            }
+           
         }
+
+        $('#sendAllUsers').click(function(){
+            swal( "Mail Sent Successfully!", "", "success" );
+        });
+
     </script>
 
 

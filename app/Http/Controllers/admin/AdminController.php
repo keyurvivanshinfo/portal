@@ -11,14 +11,16 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-// middleware
+// jobs
+
+use App\Jobs\SendAllUserData;
 
 class AdminController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('userRole:3');
+        //    
     }
 
     // return admin dashboared view
@@ -125,4 +127,17 @@ class AdminController extends Controller
         return redirect('adminViewAllUsers');
     }
 
+
+   
+
+    // with post method send all users data
+    public function mailAllUserDataPost(){
+        SendAllUserData::dispatchAfterResponse();
+        // SendAllUserData::dispatchAfterResponse();
+        return back();
+    }
+
 }
+
+
+git commit -m "added jobs for send all users,last 24 hours registred user data to the admin"
