@@ -35,7 +35,8 @@ Route::get('googleSearch', function () {
 })->name('googleSearch');
 
 
-Route::view('login', 'auth.login')->name('login');
+Route::view('login', 'auth.login')->name('login')->middleware(['throttle:login']);
+
 Route::view('registration', 'auth.registration')->name('registration');
 Route::view('forgotPassword', 'auth.forgotPassword')->name('forgotPassword');
 Route::post('forgotPasswordPost', [Authcontroller::class, 'forgotPasswordPost'])->name('forgotPasswordPost');
@@ -44,6 +45,10 @@ Route::post('resetPasswordPost', [Authcontroller::class, 'resetPasswordPost'])->
 Route::post('postRegistation', [Authcontroller::class, 'postRegister'])->name('registrationPost');
 Route::post('postLogin', [Authcontroller::class, 'postLogin'])->name('loginPost');
 Route::get('logout', [Authcontroller::class, 'logout'])->name('logout');
+
+// Google Login , Register routes
+Route::get('/redirectToGoogle',[Authcontroller::class, 'redirectToGoogle'])->name('redirectToGoogle');
+Route::get('/handleGoogleCallback',[Authcontroller::class,'handleGoogleCallback'])->name('handleGoogleCallback');
 
 
 // user routes
@@ -57,7 +62,7 @@ Route::middleware(["auth", "userRole:1"])->group(function () {
     Route::get('downloadImage/{path}', [usercontroller::class, 'downloadImage'])->name('downloadImage');
     Route::get('deleteImage/{id}', [usercontroller::class, 'deleteImage'])->name('deleteImage');
 
-
+    // Edit user
     Route::post('editUserByUser', [usercontroller::class, 'editUserByUser'])->name('editUserByUser');
     Route::get('editUserByUserView', [usercontroller::class, 'editUserByUserView'])->name('editUserByUserView');
 });
@@ -88,6 +93,4 @@ Route::middleware(["auth", 'userRole:3'])->group(function () {
     Route::post('mailAllUserDataPost', [AdminController::class, 'mailAllUserDataPost'])->name('mailAllUserDataPost');
 
     Route::post('mailAllUserDataAjax', [AdminController::class, 'mailAllUserDataAjax'])->name('mailAllUserDataAjax');
-
-    
 });

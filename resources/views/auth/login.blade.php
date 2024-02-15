@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Enter email" value="{{old('email')}}">
+                                            placeholder="Enter email" value="{{ old('email') }}">
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Password" value="{{old('password')}}">
+                                            placeholder="Password" value="{{ old('password') }}">
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif
@@ -75,14 +75,23 @@
 
                                     <button type="submit" name="submit"
                                         class="btn btn-primary mt-5 ml-5">Submit</button>
-                                        
-                                    </form>
-                                    
-                                    
-                                        
-                                    <a class="mt-2" href="{{ route('registration') }}"> <button class="btn btn-success mt-5 ml-5">Register</button></a>
-                                    <a class="mt-2" href="{{ route('forgotPassword') }}"> <button class="btn btn-danger mt-5 ml-5">Forgot Password</button></a>
-                                    
+
+                                </form>
+
+                                <div class="flex items-center justify-end mt-4 align-middle ">
+                                    <a href="{{ url('redirectToGoogle') }}">
+                                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+                                            style="margin-left: 3em;">
+                                    </a>
+                                </div>
+
+
+
+                                <a class="mt-2" href="{{ route('registration') }}"> <button
+                                        class="btn btn-success mt-5 ml-5">Register</button></a>
+                                <a class="mt-2" href="{{ route('forgotPassword') }}"> <button
+                                        class="btn btn-danger mt-5 ml-5">Forgot Password</button></a>
+
 
                             </div>
                         </div>

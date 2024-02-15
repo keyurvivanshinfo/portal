@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Laravel\Socialite\Facades\Socialite;
 // DB
 use DB;
 
@@ -12,6 +13,7 @@ use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
+use App\Exceptions;
 
 
 // models
@@ -44,11 +46,11 @@ class Authcontroller extends Controller
     public function forgotPasswordPost(ForgotPasswordRequest $request)
     {
 
-        $deleteToken = forgotPassword::where('email',$request->input('email'))->first();
-        if($deleteToken){
+        $deleteToken = forgotPassword::where('email', $request->input('email'))->first();
+        if ($deleteToken) {
             $deleteToken->delete();
         }
-            
+
 
         $reset_token = crypt::encryptString($request->token + time());
 
@@ -65,12 +67,11 @@ class Authcontroller extends Controller
             ];
 
 
-            if (SendMail::dispatch($request->input('email'),$maildata)) {
+            if (SendMail::dispatch($request->input('email'), $maildata)) {
                 return redirect()->route('login')->with('success', 'Password reset link has been sent to your email');
             } else {
                 return redirect()->back()->withInput()->withErrors(['faild' => "Failed To Send Email"]);
             }
-
         }
     }
 
@@ -156,14 +157,14 @@ class Authcontroller extends Controller
             // echo "ok";
 
             $uid = Auth::user()->id;
-            $role= User::find($uid)->roles->first()->id;
+            $role = User::find($uid)->roles->first()->id;
 
 
-            if ($role==1) {
+            if ($role == 1) {
                 return redirect('userDashboard')->withSuccess('you are logged in');
-            } else if ($role==3) {
+            } else if ($role == 3) {
                 return redirect('adminDashboard')->withSuccess('you are logged in');
-            } else if ($role==2) {
+            } else if ($role == 2) {
                 return redirect('editorDashboard')->withSuccess('you are logged in');
             }
         } else {
@@ -178,4 +179,27 @@ class Authcontroller extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+
+    // Redirect to google login page
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+
+        
+        // dd(request()->all());
+        // $state = request()->getSession()->pull('state');
+
+        $user = Socialite::driver('google')->user();
+        dd($user);
+        return $user;
+
+      
+        // return "ok";
+    }
+
 }
